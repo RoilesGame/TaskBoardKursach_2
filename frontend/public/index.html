@@ -1,0 +1,42 @@
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskBoard</title>
+    <meta name="description" content="Панель управления задачами TaskBoard">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <h1>TaskBoard</h1>
+                <p>Управление задачами</p>
+            </div>
+            <div id="nav-context" class="nav-context" hidden></div>
+            <div class="navbar-menu">
+                <a href="#dashboard" class="nav-link active" onclick="loadDashboard()">Панель</a>
+                <a href="#tasks" class="nav-link" onclick="loadTasks()">Задачи</a>
+                <a href="#my-tasks" class="nav-link" onclick="loadMyTasks()">Мои задачи</a>
+                <a href="#companies" class="nav-link" onclick="loadCompanies()">Компании</a>
+                <a href="#teams" class="nav-link" onclick="loadTeams()">Команды</a>
+                <a href="#profile" class="nav-link" onclick="loadProfile()">Профиль</a>
+                <a href="#" class="nav-link" onclick="logout(); return false;">Выйти</a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div id="content-area">
+                <!-- Здесь будет содержимое -->
+            </div>
+        </main>
+    </div>
+
+    <script src="toast.js"></script>
+    <script src="api-client.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

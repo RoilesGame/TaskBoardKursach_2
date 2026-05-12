@@ -1,0 +1,5 @@
+{
+    "version": "1.0.0",
+    "information": "This project uses C# with Entity Framework Core",
+    "description": "TaskBoard API Backend - ASP.NET Core Web API"
+}

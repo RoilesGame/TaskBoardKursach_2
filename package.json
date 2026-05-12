@@ -1,0 +1,24 @@
+{
+    "name": "taskboard-manager",
+    "version": "1.0.0",
+    "description": "TaskBoard Manager - Task Management Application",
+    "scripts": {
+        "dev": "npm run dev:backend & npm run dev:frontend",
+        "dev:backend": "cd backend && dotnet run --project TaskBoard.Api",
+        "dev:frontend": "cd frontend && php -S localhost:8000 -t public",
+        "db:setup": "psql -U postgres -f database/schema.sql",
+        "docker:up": "docker-compose up -d",
+        "docker:down": "docker-compose down"
+    },
+    "keywords": [
+        "taskboard",
+        "task-management",
+        "project-management",
+        "csharp",
+        "javascript",
+        "php",
+        "aspnet-core"
+    ],
+    "author": "",
+    "license": "MIT"
+}

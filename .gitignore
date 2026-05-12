@@ -1,0 +1,52 @@
+# Build configuration
+node_modules/
+*.class
+*.dll
+*.so
+*.exe
+*.o
+bin/
+obj/
+.vs/
+.vscode/
+__pycache__/
+
+# Database
+*.db
+*.sqlite
+postgres_data/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+*.swp
+*.swo
+*.swn
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+
+# PHP
+.php_cs.cache
+composer.lock
+vendor/
+
+# Frontend
+dist/
+node_modules/
+npm-debug.log

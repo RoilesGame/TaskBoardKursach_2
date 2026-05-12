@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskBoard — Регистрация</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            font-size: 32px;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .signup-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .error {
+            background-color: #fadbd8;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #888;
+            margin-top: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>TaskBoard</h1>
+            <p>Создайте аккаунт</p>
+        </div>
+
+        <form id="registerForm" onsubmit="handleRegister(event)">
+            <div id="errorMessage" class="error" style="display: none;"></div>
+
+            <div class="form-group">
+                <label for="fullName">Имя</label>
+                <input type="text" id="fullName" name="fullName" required placeholder="Как к вам обращаться"
+                    autocomplete="name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="user@example.com"
+                    autocomplete="username">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" required minlength="6"
+                    placeholder="Не менее 6 символов" autocomplete="new-password">
+                <p class="hint">Минимум 6 символов (проверяется на сервере).</p>
+            </div>
+
+            <button type="submit" class="login-btn">Зарегистрироваться</button>
+        </form>
+
+        <div class="signup-link">
+            Уже есть аккаунт? <a href="login.html">Войти</a>
+        </div>
+    </div>
+
+    <script src="api-client.js"></script>
+    <script>
+        function setSession(user) {
+            localStorage.setItem('userId', user.id);
+            localStorage.setItem('userEmail', user.email);
+            localStorage.setItem('userFullName', user.fullName);
+            if (user.token) {
+                localStorage.setItem('token', user.token);
+            }
+        }
+
+        async function handleRegister(event) {
+            event.preventDefault();
+
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('errorMessage');
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+
+            errorDiv.style.display = 'none';
+            submitBtn.disabled = true;
+
+            try {
+                const data = await apiClient.register({ fullName, email, password });
+                setSession(data);
+                window.location.href = 'index.html';
+            } catch (e) {
+                errorDiv.textContent = e.message || 'Не удалось зарегистрироваться';
+                errorDiv.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+            }
+        }
+
+        if (localStorage.getItem('userId')) {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+
+</html>
