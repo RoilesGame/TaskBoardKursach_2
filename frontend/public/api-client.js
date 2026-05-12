@@ -1,5 +1,6 @@
-// API Configuration
-const API_BASE_URL = 'http://localhost:5000/api';
+// API: по умолчанию 5000. Если порт занят — второй экземпляр: dotnet run --launch-profile "TaskBoard.Api (порт 5001)"
+// и в консоли браузера: localStorage.setItem('TASKBOARD_API_BASE', 'http://localhost:5001/api'); location.reload();
+const API_BASE_URL = localStorage.getItem('TASKBOARD_API_BASE') || 'http://localhost:5000/api';
 
 class ApiClient {
     constructor(baseUrl = API_BASE_URL) {

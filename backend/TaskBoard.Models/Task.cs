@@ -7,10 +7,10 @@ namespace TaskBoard.Models
         public Guid Id { get; set; }
         public Guid CompanyId { get; set; }
         public Guid? TeamId { get; set; }
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
         public string? Description { get; set; }
-        public string Status { get; set; } // backlog, in_progress, review, done
-        public string Priority { get; set; } // low, medium, high, critical
+        public string Status { get; set; } = null!; // backlog, in_progress, review, done
+        public string Priority { get; set; } = null!; // low, medium, high, critical
         public Guid? AssigneeId { get; set; }
         public Guid CreatedBy { get; set; }
         public DateTime? DueDate { get; set; }
